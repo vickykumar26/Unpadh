@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.HomeFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingBottom="80dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginEnd="23dp">
+
+    <ImageView
+        android:id="@+id/profile_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/profile_dash"
+        android:layout_marginTop="28dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/userAccountName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hi, Vicky!"
+        android:textSize="18sp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textColor="@color/black"
+        android:layout_marginTop="23dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/profile_img"/>
+
+    <TextView
+        android:id="@+id/startlearning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Let’s start learning"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins"
+        android:textColor="#70747E"
+        app:layout_constraintTop_toBottomOf="@+id/userAccountName"
+        app:layout_constraintStart_toStartOf="@+id/userAccountName"/>
+
+    <ImageView
+        android:id="@+id/cart_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:src="@drawable/cart_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="24dp"
+        android:elevation="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/startlearning"
+        app:layout_constraintStart_toStartOf="@+id/startlearning"
+        app:layout_constraintEnd_toEndOf="parent">
+        
+            <TextView
+                android:id="@+id/spinner_tv"
+                android:layout_width="119dp"
+                android:layout_height="48dp"
+                android:text="All Category"
+                android:textSize="12sp"
+                android:background="@drawable/spinner_background"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:layout_gravity="center"
+                android:drawableEnd="@drawable/arrow_drop_down"
+                android:drawableTint="@color/white"/>
+
+            <Spinner
+                android:id="@+id/spinnere"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:spinnerMode="dropdown"/>
+
+            <TextView
+                android:id="@+id/search_tv"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Search data science..."
+                android:textSize="15sp"
+                android:background="@drawable/search_background"
+                android:textColor="#888C94"
+                android:gravity="center"
+                android:paddingEnd="15dp"
+                android:layout_gravity="center"
+                android:drawableEnd="@drawable/search"
+                android:drawableTint="#3AA9AB"
+                android:drawablePadding="60dp"/>
+
+    </LinearLayout>
+
+    <com.smarteist.autoimageslider.SliderView
+        android:id="@+id/imageSlider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_130sdp"
+        android:layout_marginTop="20dp"
+        app:sliderAnimationDuration="600"
+        app:sliderAutoCycleDirection="back_and_forth"
+        app:sliderAutoCycleEnabled="true"
+        app:sliderIndicatorAnimationDuration="600"
+        app:sliderIndicatorGravity="center_horizontal|bottom"
+        app:sliderIndicatorMargin="15dp"
+        app:sliderIndicatorOrientation="horizontal"
+        app:sliderIndicatorPadding="3dp"
+        app:sliderIndicatorRadius="2dp"
+        app:sliderIndicatorSelectedColor="#5A5A5A"
+        app:sliderIndicatorUnselectedColor="#FFF"
+        app:sliderScrollTimeInSec="1"
+        app:sliderStartAutoCycle="true"
+        app:layout_constraintTop_toBottomOf="@id/linearlayout"
+        app:layout_constraintStart_toStartOf="@id/linearlayout"
+        app:layout_constraintEnd_toEndOf="@id/linearlayout"/>
+
+    <TextView
+        android:id="@+id/allCourse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="All Courses"
+        android:textColor="#FF282F3E"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageSlider" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="See more"
+        android:textSize="14sp"
+        android:textColor="#FF2B83F2"
+        android:layout_marginTop="15dp"
+        android:drawablePadding="10dp"
+        android:drawableEnd="@drawable/see_more_arrow"
+        android:fontFamily="@font/poppins_semibold"
+        app:layout_constraintTop_toBottomOf="@+id/imageSlider"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/allCourse"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/accadmicProgram"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Popular Acadmic Program"
+                android:textColor="#FF282F3E"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="See more"
+                android:textSize="14sp"
+                android:textColor="#FF2B83F2"
+                android:layout_marginTop="22dp"
+                android:drawablePadding="10dp"
+                android:drawableEnd="@drawable/see_more_arrow"
+                android:fontFamily="@font/poppins_semibold"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/parentRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/accadmicProgram"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/recommendedCouse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Recommended for you"
+                android:textColor="#FF282F3E"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/parentRecyclerView" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="See more"
+                android:textSize="14sp"
+                android:textColor="#FF2B83F2"
+                android:layout_marginTop="22dp"
+                android:drawablePadding="10dp"
+                android:drawableEnd="@drawable/see_more_arrow"
+                android:fontFamily="@font/poppins_semibold"
+                app:layout_constraintTop_toBottomOf="@+id/parentRecyclerView"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recommendedRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/recommendedCouse"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/bestCourse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Best Courses"
+                android:textColor="#FF282F3E"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recommendedRecyclerView" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="See more"
+                android:textSize="14sp"
+                android:textColor="#FF2B83F2"
+                android:layout_marginTop="22dp"
+                android:drawablePadding="10dp"
+                android:drawableEnd="@drawable/see_more_arrow"
+                android:fontFamily="@font/poppins_semibold"
+                app:layout_constraintTop_toBottomOf="@+id/recommendedRecyclerView"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/bestCourseRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/bestCourse"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/bestCourseRecyclerView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:backgroundTint="#39A992"
+                app:cardCornerRadius="20dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/govtJobText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Best Government\nExam Preparation\nOnline test series"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginStart="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <Button
+                        android:id="@+id/join_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Join Now"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:paddingEnd="20dp"
+                        android:paddingStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="@drawable/join_btn_background"
+                        app:layout_constraintTop_toBottomOf="@+id/govtJobText"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/join_image"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/designCourse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Top Courses in design"
+                android:textColor="#FF282F3E"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="See more"
+                android:textSize="14sp"
+                android:textColor="#FF2B83F2"
+                android:layout_marginTop="22dp"
+                android:drawablePadding="10dp"
+                android:drawableEnd="@drawable/see_more_arrow"
+                android:fontFamily="@font/poppins_semibold"
+                app:layout_constraintTop_toBottomOf="@+id/cardView"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/designCourseRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/designCourse"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/viewCourse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Students are viewing"
+                android:textColor="#FF282F3E"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/designCourseRecyclerView" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="See more"
+                android:textSize="14sp"
+                android:textColor="#FF2B83F2"
+                android:layout_marginTop="22dp"
+                android:drawablePadding="10dp"
+                android:drawableEnd="@drawable/see_more_arrow"
+                android:fontFamily="@font/poppins_semibold"
+                app:layout_constraintTop_toBottomOf="@+id/designCourseRecyclerView"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/viewCourseRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/viewCourse"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/teacherList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Our Expert Teachers"
+                android:textColor="#FF282F3E"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewCourseRecyclerView" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="See more"
+                android:textSize="14sp"
+                android:textColor="#FF2B83F2"
+                android:layout_marginTop="22dp"
+                android:drawablePadding="10dp"
+                android:drawableEnd="@drawable/see_more_arrow"
+                android:fontFamily="@font/poppins_semibold"
+                app:layout_constraintTop_toBottomOf="@+id/viewCourseRecyclerView"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/teacherListRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/teacherList"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

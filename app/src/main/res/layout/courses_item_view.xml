@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/courseImageView"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/course_adobe"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/courseName"
+        android:layout_toEndOf="@id/courseImageView"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:fontFamily="@font/poppins_semibold"
+        tools:text="Adobe illustrator for all\nbeginner artist"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/teacherName"
+        android:textSize="13sp"
+        android:layout_toEndOf="@id/courseImageView"
+        android:layout_below="@id/courseName"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins"
+        tools:text="Samule Doe"/>
+
+    <ImageView
+        android:id="@+id/user_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/user_img"
+        android:layout_toEndOf="@id/courseImageView"
+        android:layout_below="@id/teacherName"/>
+
+    <TextView
+        android:id="@+id/countStudent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4k student"
+        android:textSize="12sp"
+        android:textColor="#70747E"
+        android:layout_marginStart="2dp"
+        android:layout_toEndOf="@id/user_img"
+        android:layout_below="@id/teacherName"/>
+
+    <ImageView
+        android:id="@+id/star_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/star_rating"
+        android:layout_toEndOf="@id/countStudent"
+        android:layout_below="@id/teacherName"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/courseRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4.7"
+        android:textColor="#70747E"
+        android:textSize="12sp"
+        android:layout_toEndOf="@id/star_rating"
+        android:layout_below="@id/teacherName"
+        android:layout_marginStart="3dp"/>
+
+
+
+</RelativeLayout>

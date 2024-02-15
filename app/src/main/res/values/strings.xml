@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Unpadh</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="skip">Skip</string>
+    <string-array name="profession">
+        <item>Select Profession</item>
+        <item>Student</item>
+        <item>Teacher</item>
+    </string-array>
+
+    <string-array name="allCategory">
+        <item>All Category</item>
+        <item>Government Exams Preparation</item>
+        <item>Cyber Security</item>
+        <item>Data Science &amp; Business Analytics</item>
+        <item>AI &amp; Machine Learning</item>
+        <item>Management Certification</item>
+        <item>Development Courses</item>
+        <item>Cloud Computing</item>
+        <item>Business and Leadership</item>
+        <item>Agile and Scrum</item>
+        <item>IT Service and Architecture</item>
+        <item>Digital Marketing</item>
+        <item>Big Data</item>
+        <item>Finance &amp; Accounting</item>
+        <item>IT &amp; Software</item>
+        <item>Office Productivity</item>
+        <item>personal Development</item>
+        <item>Marketing</item>
+        <item>Lifestyle</item>
+        <item>Photography &amp; Video</item>
+        <item>Health &amp; Fitness</item>
+        <item>Music</item>
+        <item>Teaching &amp; Academics</item>
+        <item>Designs</item>
+    </string-array>
+</resources>
