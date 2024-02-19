@@ -1,7 +1,9 @@
 package com.unpadh.unpadhapp.api
 
+import com.unpadh.unpadhapp.api.data.RegistrationResponse
 import com.unpadh.unpadhapp.api.data.User
 import com.unpadh.unpadhapp.utils.ApiEndPoints
+import retrofit2.Response
 import retrofit2.http.POST
 import retrofit2.http.Query
 
@@ -14,16 +16,17 @@ interface ApiService {
 
     @POST(ApiEndPoints.USER_LOGIN)
     suspend fun signInUser(
-        @Query("Email") email : String,
+        @Query("email") email : String,
         @Query("password") password : String
-    ): List<User>
+    ): Response<RegistrationResponse>
 
 
-    @POST(ApiEndPoints.USER_LOGIN)
+    @POST(ApiEndPoints.USER_REGISTER)
     suspend fun signUpUser(
-        @Query("Username") userName : String,
-        @Query("Email") email : String,
-        @Query("Password") password : String,
-        @Query("ConfirmPassword") confirmPassword : String
-    ): List<User>
+        @Query("fname") userName : String,
+        @Query("email") email : String,
+        @Query("mobileNumber") mobileNumber : String,
+        @Query("password") password : String,
+        @Query("cPassword") confirmPassword : String
+    ): Response<RegistrationResponse>
 }

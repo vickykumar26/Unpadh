@@ -1,8 +1,10 @@
 package com.unpadh.unpadhapp.api.repository
 
 import com.unpadh.unpadhapp.api.ApiService
+import com.unpadh.unpadhapp.api.data.RegistrationResponse
 import com.unpadh.unpadhapp.api.data.User
 import com.unpadh.unpadhapp.utils.Api_Base_URL
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -20,12 +22,12 @@ class UserRepository {
         retrofit.create(ApiService::class.java)
     }
 
-    suspend fun signInUser(email : String, password : String): List<User> {
+    suspend fun signInUser(email : String, password : String): Response<RegistrationResponse> {
         return apiService.signInUser(email,password)
     }
 
-    suspend fun signUpUser(userName : String, email : String, password : String, confirmPassword : String): List<User> {
-        return apiService.signUpUser(userName,email,password,confirmPassword)
+    suspend fun signUpUser(userName : String, email : String,mobileNumber : String, password : String, confirmPassword : String): Response<RegistrationResponse> {
+        return apiService.signUpUser(userName,email,mobileNumber,password,confirmPassword)
     }
 
 }

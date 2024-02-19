@@ -6,6 +6,6 @@ package com.unpadh.unpadhapp.utils
  */
 object Api_Base_URL {
 
-    const val BASE_URL = "https://deploy-test-eta-peach.vercel.app/"
+    const val BASE_URL = "https://the-unpad-auth-api-android.vercel.app/"
 
 }

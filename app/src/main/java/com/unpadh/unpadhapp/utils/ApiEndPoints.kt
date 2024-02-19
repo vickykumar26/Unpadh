@@ -9,4 +9,6 @@ object ApiEndPoints {
 
  const val USER_LOGIN = "user/login"
 
+ const val USER_REGISTER = "user/register"
+
 }
