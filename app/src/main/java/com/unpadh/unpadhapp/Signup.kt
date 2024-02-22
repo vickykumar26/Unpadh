@@ -1,37 +1,40 @@
 package com.unpadh.unpadhapp
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
-import android.util.TypedValue
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.google.android.material.textfield.TextInputLayout
+import androidx.activity.result.contract.ActivityResultContracts
 import com.unpadh.unpadhapp.databinding.ActivitySignupBinding
+import com.unpadh.unpadhapp.utils.Utils
 
 class Signup : AppCompatActivity() {
 
     lateinit var binding: ActivitySignupBinding
+    private var userImageUri : Uri? = null
+    private val selectImage = registerForActivityResult(ActivityResultContracts.GetContent()){
+        userImageUri = it
+        binding.ivUserImage.setImageURI(userImageUri)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.apply {
+            ivUserImage.setOnClickListener() {
+                selectImage.launch("image/*")
+            }
+
             // Your remaining code here after validation
 
-        binding.loginOpt.setOnClickListener(){
-            val intent = Intent(this@Signup, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+            binding.loginOpt.setOnClickListener() {
+                val intent = Intent(this@Signup, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
 
 //        ArrayAdapter.createFromResource(
 //            applicationContext,
@@ -68,36 +71,53 @@ class Signup : AppCompatActivity() {
 //            }
 //        }
 
+            nameFocusListener()
+            emailFocusListener()
+            passwordFocusListener()
+            cnfpasswordFocusListener()
+            phoneFocusListener()
 
-        nameFocusListener()
-        emailFocusListener()
-        passwordFocusListener()
-        cnfpasswordFocusListener()
-        phoneFocusListener()
+            binding.signupBtn.setOnClickListener { submitForm() }
 
-        binding.signupBtn.setOnClickListener { submitForm() }
+        }
     }
 
 
     private fun submitForm()
     {
+        Utils.showDialog(this)
+
         binding.textInputName.helperText = validName()
         binding.textInputEmail.helperText = validEmail()
+        binding.textInputPhone.helperText = validPhone()
         binding.textInputPassword.helperText = validPassword()
         binding.textInputCnfpassword.helperText = validCnfPassword()
-        binding.textInputPhone.helperText = validPhone()
 
         val validName = binding.textInputName.helperText == null
         val validEmail = binding.textInputEmail.helperText == null
+        val validPhone = binding.textInputPhone.helperText == null
         val validPassword = binding.textInputPassword.helperText == null
         val validCnfPassword = binding.textInputCnfpassword.helperText == null
-        val validPhone = binding.textInputPhone.helperText == null
 
-        if (validName && validEmail && validPassword && validCnfPassword && validPhone) {
-            
-            val intent = Intent(this@Signup, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+        val name = binding.etName.text.toString()
+        val email = binding.etEmail.text.toString()
+        val phone = binding.etPhone.text.toString()
+        val password = binding.etPaswd.text.toString()
+        val confirmPassword = binding.etCnfpaswd.text.toString()
+
+        if (validName && validEmail && validPhone && validPassword && validCnfPassword) {
+
+            if (name.isNotEmpty() && email.isNotEmpty() && phone.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
+
+                if (userImageUri == null) {
+                    Utils.hideDialog()
+                    Utils.showToast(this, "Please select one image")
+                }
+            } else {
+                Utils.hideDialog()
+            }
+        }else{
+            Utils.hideDialog()
         }
     }
 
@@ -222,7 +242,7 @@ class Signup : AppCompatActivity() {
         val phoneText = binding.etPhone.text.toString()
         if(!phoneText.matches(".*[0-9].*".toRegex()))
         {
-            return "Please enter valid mobile no"
+            return "Please enter mobile no"
         }
         if(phoneText.length != 10)
         {

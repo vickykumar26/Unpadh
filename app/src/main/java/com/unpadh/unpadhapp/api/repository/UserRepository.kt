@@ -8,11 +8,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
-/**
- * Created by Gaurav Suyal on 19-02-2024.
- */
-
 class UserRepository {
     private val apiService: ApiService by lazy {
         val retrofit = Retrofit.Builder()

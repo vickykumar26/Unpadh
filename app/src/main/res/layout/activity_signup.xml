@@ -51,7 +51,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/signup_txt" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profileImage"
+                android:id="@+id/ivUserImage"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="65dp"
@@ -114,31 +114,60 @@
         android:fontFamily="@font/poppins"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_input_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:helperText=""
-        app:helperTextTextColor="#FFFF8989"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginStart="25dp"
-        app:errorEnabled="true"
-        app:layout_constraintTop_toBottomOf="@+id/text_input_email"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_phone"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/phoneLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter mobile no"
-            android:inputType="phone"
-            android:textSize="14sp"
-            android:textColor="#FF70747E"
-            android:fontFamily="@font/poppins"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginStart="25dp"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/country_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:ccp_autoDetectCountry="true"
+                app:ccp_defaultNameCode="IND"
+                app:ccp_showFlag="true"
+                app:ccp_showNameCode="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:helperText=""
+                app:helperTextTextColor="#FFFF8989"
+                app:errorEnabled="true"
+                app:layout_constraintStart_toEndOf="@+id/country_code"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter mobile no"
+                    android:inputType="phone"
+                    android:textSize="14sp"
+                    android:textColor="#FF70747E"
+                    android:fontFamily="@font/poppins"
+                    app:layout_constraintStart_toEndOf="@+id/country_code"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 <!--            <TextView-->
 <!--                android:id="@+id/sp_layout"-->
@@ -192,7 +221,7 @@
                 android:layout_marginEnd="25dp"
                 android:layout_marginStart="25dp"
                 app:errorEnabled="true"
-                app:layout_constraintTop_toBottomOf="@id/text_input_phone"
+                app:layout_constraintTop_toBottomOf="@id/phoneLayout"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 

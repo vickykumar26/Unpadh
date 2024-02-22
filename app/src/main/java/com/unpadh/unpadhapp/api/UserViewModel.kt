@@ -10,11 +10,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
-/**
- * Created by Gaurav Suyal on 19-02-2024.
- */
-
 class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
     private val _users = MutableLiveData<RegistrationResponse>()
     val users: LiveData<RegistrationResponse>
@@ -29,7 +24,6 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
 
         }
     }
-
 
     fun apiCallForSignUpUser(userName : String, email : String,mobileNumber : String, password : String, confirmPassword : String) {
         CoroutineScope(Dispatchers.IO).launch {

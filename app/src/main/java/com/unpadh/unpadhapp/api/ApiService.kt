@@ -7,11 +7,6 @@ import retrofit2.Response
 import retrofit2.http.POST
 import retrofit2.http.Query
 
-
-/**
- * Created by Gaurav Suyal on 19-02-2024.
- */
-
 interface ApiService {
 
     @POST(ApiEndPoints.USER_LOGIN)

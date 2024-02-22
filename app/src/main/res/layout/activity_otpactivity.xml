@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OTPActivity">
+
+    <ImageView
+        android:id="@+id/backBtn"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/back"
+        android:layout_marginStart="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/verificationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Verification"
+        android:textColor="@color/teal_700"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/skipBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="SKIP"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.775"
+        app:layout_constraintStart_toEndOf="@+id/verificationText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/verificationDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/poppins"
+        android:text="We texted you a code to verify\nyour phone number"
+        android:textColor="#575757"
+        android:gravity="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/verificationText" />
+
+    <com.chaos.view.PinView
+        android:id="@+id/otp_view"
+        app:itemCount="6"
+        app:itemWidth="50dp"
+        app:itemHeight="50dp"
+        android:gravity="center"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:itemBackground="@color/white"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:inputType="number"
+        android:cursorVisible="true"
+        app:hideLineWhenFilled="false"
+        app:itemRadius="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/verificationDesc"/>
+
+    <TextView
+        android:id="@+id/resendDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/poppins"
+        android:text="I did not receive a code"
+        android:textColor="#575757"
+        android:gravity="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/otp_view" />
+
+    <TextView
+        android:id="@+id/resendBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Resend"
+        android:textColor="#2196F3"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resendDesc"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/signup_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:background="@drawable/drawable_btn"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="center"
+        android:paddingVertical="@dimen/_10sdp"
+        android:text="Continue"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_marginTop="@dimen/_60sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resendBtn"
+        app:layout_constraintVertical_bias="0.064"
+        tools:layout_editor_absoluteX="19dp" />
+
+<!--            <ImageView-->
+<!--                android:id="@+id/backImg"-->
+<!--                android:layout_width="@dimen/_40sdp"-->
+<!--                android:layout_height="@dimen/_40sdp"-->
+<!--                android:src="@drawable/back"-->
+<!--                android:padding="@dimen/_10sdp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/codeText"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/_30sdp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:fontFamily="@font/poppins_semibold"-->
+<!--                android:includeFontPadding="false"-->
+<!--                android:text="Co\nde"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textAllCaps="true"-->
+<!--                android:textColor="@color/appcolor"-->
+<!--                android:textSize="100sp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/verificationText"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:text="Verification"-->
+<!--                android:fontFamily="@font/poppins_semibold"-->
+<!--                android:textAlignment="center"-->
+<!--                android:includeFontPadding="false"-->
+<!--                android:textAllCaps="true"-->
+<!--                android:textColor="@color/appcolor"-->
+<!--                android:textSize="24sp"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/codeText"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/phoneLbl"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginTop="50dp"-->
+<!--                android:fontFamily="@font/poppins_medium"-->
+<!--                android:text="Enter one time password sent on\n+919905420010"-->
+<!--                android:textAlignment="center"-->
+<!--                android:includeFontPadding="false"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="16sp"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/verificationText"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"/>-->
+
+<!--            <com.chaos.view.PinView-->
+<!--                android:id="@+id/otp_view"-->
+<!--                app:itemCount="6"-->
+<!--                app:itemWidth="50dp"-->
+<!--                app:itemHeight="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:focusable="true"-->
+<!--                android:focusableInTouchMode="true"-->
+<!--                android:layout_marginTop="50dp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:itemBackground="@color/white"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:inputType="number"-->
+<!--                android:cursorVisible="true"-->
+<!--                app:hideLineWhenFilled="false"-->
+<!--                app:itemRadius="10dp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/phoneLbl"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/signup_btn"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="@dimen/_15sdp"-->
+<!--        android:background="@drawable/drawable_btn"-->
+<!--        android:fontFamily="@font/poppins_semibold"-->
+<!--        android:gravity="center"-->
+<!--        android:paddingVertical="@dimen/_10sdp"-->
+<!--        android:text="Continue"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="16sp"-->
+<!--        android:layout_marginTop="@dimen/_40sdp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/otp_view"-->
+<!--        app:layout_constraintVertical_bias="0.064"-->
+<!--        tools:layout_editor_absoluteX="19dp" />-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Unpadh"
         tools:targetApi="33">
         <activity
+            android:name=".OTPActivity"
+            android:exported="false" />
+        <activity
             android:name=".PasswordChangeScreen"
             android:exported="false" />
         <activity
