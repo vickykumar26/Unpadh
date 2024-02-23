@@ -5,7 +5,11 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.ViewModelProvider
+import com.unpadh.unpadhapp.api.UserViewModel
+import com.unpadh.unpadhapp.api.repository.UserRepository
 import com.unpadh.unpadhapp.databinding.ActivitySignupBinding
 import com.unpadh.unpadhapp.utils.Utils
 
@@ -18,10 +22,16 @@ class Signup : AppCompatActivity() {
         binding.ivUserImage.setImageURI(userImageUri)
     }
 
+    private lateinit var viewModel: UserViewModel
+    private val userRepository = UserRepository()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        viewModel = UserViewModel(userRepository)
 
         binding.apply {
             ivUserImage.setOnClickListener() {
@@ -80,8 +90,24 @@ class Signup : AppCompatActivity() {
             binding.signupBtn.setOnClickListener { submitForm() }
 
         }
+
+        viewModel.users.observe(this) { users ->
+            // Update UI with users data
+            Utils.hideDialog()
+            if (users != null){
+                Toast.makeText(this, users.message.toString(),Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(this,"Something went wrong, please try again later.",Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 
+    var name : String = ""
+    var email : String = ""
+    var phone : String = ""
+    var password : String = ""
+    var confirmPassword : String = ""
 
     private fun submitForm()
     {
@@ -99,11 +125,11 @@ class Signup : AppCompatActivity() {
         val validPassword = binding.textInputPassword.helperText == null
         val validCnfPassword = binding.textInputCnfpassword.helperText == null
 
-        val name = binding.etName.text.toString()
-        val email = binding.etEmail.text.toString()
-        val phone = binding.etPhone.text.toString()
-        val password = binding.etPaswd.text.toString()
-        val confirmPassword = binding.etCnfpaswd.text.toString()
+        name = binding.etName.text.toString()
+        email = binding.etEmail.text.toString()
+        phone = binding.etPhone.text.toString()
+        password = binding.etPaswd.text.toString()
+        confirmPassword = binding.etCnfpaswd.text.toString()
 
         if (validName && validEmail && validPhone && validPassword && validCnfPassword) {
 
@@ -113,6 +139,8 @@ class Signup : AppCompatActivity() {
                     Utils.hideDialog()
                     Utils.showToast(this, "Please select one image")
                 }
+
+                viewModel.apiCallForSignUpUser(name,email,phone,password,confirmPassword)
             } else {
                 Utils.hideDialog()
             }

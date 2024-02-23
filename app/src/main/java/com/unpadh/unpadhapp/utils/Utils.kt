@@ -10,7 +10,7 @@ import com.unpadh.unpadhapp.Signup
 object Utils {
     private var dialog : AlertDialog? = null
 
-    fun showDialog(context: Signup){
+    fun showDialog(context: Context){
         dialog = AlertDialog.Builder(context).setView(R.layout.progress_dialog).setCancelable(false).create()
         dialog!!.show()
     }

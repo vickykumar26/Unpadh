@@ -3,22 +3,45 @@ package com.unpadh.unpadhapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.unpadh.unpadhapp.api.UserViewModel
+import com.unpadh.unpadhapp.api.repository.UserRepository
 import com.unpadh.unpadhapp.databinding.ActivityMainBinding
 import com.unpadh.unpadhapp.onboarding_screens.OnBoardingFirstFragment
+import com.unpadh.unpadhapp.utils.Utils
 import java.net.Inet4Address
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
 
+    private lateinit var viewModel: UserViewModel
+    private val userRepository = UserRepository()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        viewModel = UserViewModel(userRepository)
+
+        viewModel.users.observe(this) { users ->
+            Log.d("apiCallForSignInUser if ",users.toString())
+
+            // Update UI with users data
+            Utils.hideDialog()
+            if (users != null){
+                Toast.makeText(this, users.message.toString(),Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(this,"Something went wrong, please try again later.",Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
         binding.skipBtn.setOnClickListener(){
             val intent = Intent(this@MainActivity, DashboardScreen::class.java)
@@ -47,6 +70,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun submitForm() {
+        Utils.showDialog(this)
         binding.textInputEmail.helperText = validEmail()
         binding.textInputPswd.helperText = validPassword()
 
@@ -54,13 +78,21 @@ class MainActivity : AppCompatActivity() {
         val validEmail = binding.textInputEmail.helperText == null
         val validPassword = binding.textInputPswd.helperText == null
 
+        var name = binding.etEmail.text.toString()
+        var email = binding.etPaswd.text.toString()
+
 
         if (validEmail && validPassword) {
+
+            viewModel.apiCallForSignInUser(name,email)
+
             //pass main dashboard intent
-            var toast =
-                Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show()
+         /*   var toast =
+                Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show()*/
 //        else
 //            invalidForm()
+        }else{
+            Utils.hideDialog()
         }
     }
 
