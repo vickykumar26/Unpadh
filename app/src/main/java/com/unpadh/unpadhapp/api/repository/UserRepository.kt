@@ -1,6 +1,7 @@
 package com.unpadh.unpadhapp.api.repository
 
 import com.unpadh.unpadhapp.api.ApiService
+import com.unpadh.unpadhapp.api.data.ForgotPassword
 import com.unpadh.unpadhapp.api.data.RegistrationResponse
 import com.unpadh.unpadhapp.api.data.SignInUserRequest
 import com.unpadh.unpadhapp.api.data.SignUpUserRequest
@@ -10,6 +11,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import okhttp3.logging.HttpLoggingInterceptor
+import java.util.concurrent.TimeUnit
 
 class UserRepository {
 
@@ -18,9 +20,13 @@ class UserRepository {
             level = HttpLoggingInterceptor.Level.BODY // Set logging level as per your requirement
         }
         return OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
             .build()
     }
+
 
     private val apiService: ApiService by lazy {
         val retrofit = Retrofit.Builder()
@@ -37,5 +43,9 @@ class UserRepository {
 
     suspend fun signUpUser(request: SignUpUserRequest): Response<RegistrationResponse> {
         return apiService.signUpUser(request)
+    }
+
+    suspend fun forgetUserPassword(request : ForgotPassword) : Response<RegistrationResponse> {
+        return apiService.forgetPassword(request)
     }
 }

@@ -7,6 +7,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.unpadh.unpadhapp.databinding.ActivityCheckEmailBinding
 import android.content.ComponentName
+import android.util.Log
+import androidx.databinding.Observable
+import com.unpadh.unpadhapp.api.UserViewModel
+import com.unpadh.unpadhapp.api.repository.UserRepository
 
 class CheckEmail : AppCompatActivity() {
 
@@ -26,8 +30,8 @@ class CheckEmail : AppCompatActivity() {
 
         binding.checkEmailBtn.setOnClickListener(){
                 openGmailApp()
-
         }
+
     }
 
     private fun openGmailApp() {

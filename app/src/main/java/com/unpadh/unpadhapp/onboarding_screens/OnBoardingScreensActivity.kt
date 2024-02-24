@@ -9,16 +9,24 @@ import com.unpadh.unpadhapp.MainActivity
 import com.unpadh.unpadhapp.R
 import com.unpadh.unpadhapp.databinding.ActivityOnBoardingScreensBinding
 import com.unpadh.unpadhapp.onboarding_screens.adapter.ViewPagerAdapter
+import com.unpadh.unpadhapp.shared_preference.SharedPreferencesDataSource
+import com.unpadh.unpadhapp.shared_preference.SharedPreferencesRepository
+import com.unpadh.unpadhapp.utils.AppConstants
 
 class OnBoardingScreensActivity : AppCompatActivity() {
 
     lateinit var binding : ActivityOnBoardingScreensBinding
+
+
+    private lateinit var sharedPreferencesRepository: SharedPreferencesDataSource
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOnBoardingScreensBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Initialize SharedPreferencesRepository
+        sharedPreferencesRepository = SharedPreferencesRepository(this)
 
         // Create an instance of the adapter that will manage the fragments
         val adapter = ViewPagerAdapter(supportFragmentManager)
@@ -36,6 +44,7 @@ class OnBoardingScreensActivity : AppCompatActivity() {
     }
 
     fun moveToBusinessActivity(){
+        sharedPreferencesRepository.saveBooleanValue(AppConstants.IS_SPLASH_SCREEN_ALREADY_SHOWN, true)
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }

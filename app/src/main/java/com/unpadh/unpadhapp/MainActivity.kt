@@ -14,6 +14,9 @@ import com.unpadh.unpadhapp.api.UserViewModel
 import com.unpadh.unpadhapp.api.repository.UserRepository
 import com.unpadh.unpadhapp.databinding.ActivityMainBinding
 import com.unpadh.unpadhapp.onboarding_screens.OnBoardingFirstFragment
+import com.unpadh.unpadhapp.shared_preference.SharedPreferencesDataSource
+import com.unpadh.unpadhapp.shared_preference.SharedPreferencesRepository
+import com.unpadh.unpadhapp.utils.AppConstants
 import com.unpadh.unpadhapp.utils.Utils
 import java.net.Inet4Address
 
@@ -23,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: UserViewModel
     private val userRepository = UserRepository()
 
+    private lateinit var sharedPreferencesRepository: SharedPreferencesDataSource
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -30,16 +35,23 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = UserViewModel(userRepository)
 
+        sharedPreferencesRepository = SharedPreferencesRepository(this)
+
         viewModel.users.observe(this) { users ->
             Log.d("apiCallForSignInUser if ",users.toString())
 
             // Update UI with users data
             Utils.hideDialog()
-            if (users != null){
-                Toast.makeText(this, users.message.toString(),Toast.LENGTH_SHORT).show()
-                val intent = Intent(this@MainActivity, DashboardScreen::class.java)
-                startActivity(intent)
-                finish()
+            if (users != null) {
+                if (users.status == 201){
+                    Toast.makeText(this, users.message.toString(),Toast.LENGTH_SHORT).show()
+                    sharedPreferencesRepository.saveBooleanValue(AppConstants.IS_USER_LOGGED_IN,true)
+                    val intent = Intent(this@MainActivity, DashboardScreen::class.java)
+                    startActivity(intent)
+                    finish()
+                }else{
+                    Toast.makeText(this,users.message.toString(),Toast.LENGTH_SHORT).show()
+                }
             }else{
                 Toast.makeText(this,"Something went wrong, please try again later.",Toast.LENGTH_SHORT).show()
             }

@@ -22,25 +22,27 @@
 
     <ImageView
         android:id="@+id/profile_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@drawable/profile_dash"
         android:layout_marginTop="28dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <TextView
-        android:id="@+id/userAccountName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hi, Vicky!"
-        android:textSize="18sp"
-        android:fontFamily="@font/poppins_semibold"
-        android:textColor="@color/black"
-        android:layout_marginTop="23dp"
-        android:layout_marginStart="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/profile_img"/>
+            <TextView
+                android:id="@+id/userAccountName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="23dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Hi, Vicky!"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/cart_img"
+                app:layout_constraintStart_toEndOf="@id/profile_img"
+                app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/startlearning"

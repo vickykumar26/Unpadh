@@ -1,9 +1,14 @@
 package com.unpadh.unpadhapp
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -11,14 +16,35 @@ import androidx.lifecycle.ViewModelProvider
 import com.unpadh.unpadhapp.api.UserViewModel
 import com.unpadh.unpadhapp.api.repository.UserRepository
 import com.unpadh.unpadhapp.databinding.ActivitySignupBinding
+import com.unpadh.unpadhapp.shared_preference.SharedPreferencesDataSource
+import com.unpadh.unpadhapp.shared_preference.SharedPreferencesRepository
+import com.unpadh.unpadhapp.utils.AppConstants
 import com.unpadh.unpadhapp.utils.Utils
+import java.io.ByteArrayOutputStream
 
 class Signup : AppCompatActivity() {
 
     lateinit var binding: ActivitySignupBinding
     private var userImageUri : Uri? = null
-    private val selectImage = registerForActivityResult(ActivityResultContracts.GetContent()){
+
+    private lateinit var sharedPreferencesRepository: SharedPreferencesDataSource
+
+    private val selectImage = registerForActivityResult(ActivityResultContracts.GetContent()) {
         userImageUri = it
+        var base64Image: String? = null
+
+        // Check the size of the image in bytes
+        if (it != null) {
+            base64Image = imageUriToBase64(binding.ivUserImage.context, it)
+            val clearBannerImageUrl =
+                sharedPreferencesRepository.getStringValue(AppConstants.USER_PROFILE_PIC, "")
+            if (clearBannerImageUrl != null) {
+                sharedPreferencesRepository.clearBannerImage(AppConstants.USER_PROFILE_PIC)
+            }
+            if (base64Image != null) {
+                sharedPreferencesRepository.saveStringValue(AppConstants.USER_PROFILE_PIC, base64Image)
+            }
+        }
         binding.ivUserImage.setImageURI(userImageUri)
     }
 
@@ -32,6 +58,12 @@ class Signup : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel = UserViewModel(userRepository)
+
+        sharedPreferencesRepository = SharedPreferencesRepository(this)
+
+        /*binding.signupTxt.setOnClickListener {
+            Log.d("USER_PROFILE_PIC  ",sharedPreferencesRepository.getStringValue(AppConstants.USER_PROFILE_PIC, "").toString())
+        }*/
 
         binding.apply {
             ivUserImage.setOnClickListener() {
@@ -94,11 +126,15 @@ class Signup : AppCompatActivity() {
         viewModel.users.observe(this) { users ->
             // Update UI with users data
             Utils.hideDialog()
-            if (users != null){
-                Toast.makeText(this, users.message.toString(),Toast.LENGTH_SHORT).show()
-                val intent = Intent(this@Signup, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+            if (users != null) {
+                if (users.status == 201){
+                    Toast.makeText(this, users.message.toString(),Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@Signup, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }else{
+                    Toast.makeText(this,users.message.toString(),Toast.LENGTH_SHORT).show()
+                }
             }else{
                 Toast.makeText(this,"Something went wrong, please try again later.",Toast.LENGTH_SHORT).show()
             }
@@ -141,9 +177,11 @@ class Signup : AppCompatActivity() {
                 if (userImageUri == null) {
                     Utils.hideDialog()
                     Utils.showToast(this, "Please select one image")
-                }
+                }else{
+                    sharedPreferencesRepository.saveStringValue(AppConstants.USER_NAME, name)
 
-                viewModel.apiCallForSignUpUser(name,email,phone,password,confirmPassword)
+                    viewModel.apiCallForSignUpUser(name,email,phone,password,confirmPassword)
+                }
             } else {
                 Utils.hideDialog()
             }
@@ -282,5 +320,13 @@ class Signup : AppCompatActivity() {
         return null
     }
 
+    fun imageUriToBase64(context: Context, imageUri: Uri): String? {
+        val inputStream = context.contentResolver.openInputStream(imageUri)
+        val bitmap = BitmapFactory.decodeStream(inputStream)
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+        return android.util.Base64.encodeToString(byteArray, android.util.Base64.DEFAULT)
+    }
 }
 

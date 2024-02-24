@@ -16,6 +16,9 @@ import com.unpadh.unpadhapp.fragments.HomeFragment
 import com.unpadh.unpadhapp.fragments.MyLearningFragment
 import com.unpadh.unpadhapp.fragments.SearchFragment
 import com.unpadh.unpadhapp.fragments.WishlistFragment
+import com.unpadh.unpadhapp.shared_preference.SharedPreferencesDataSource
+import com.unpadh.unpadhapp.shared_preference.SharedPreferencesRepository
+import com.unpadh.unpadhapp.utils.AppConstants
 
 class DashboardScreen : AppCompatActivity() {
 
@@ -26,6 +29,7 @@ class DashboardScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDashboardScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when(item.itemId){

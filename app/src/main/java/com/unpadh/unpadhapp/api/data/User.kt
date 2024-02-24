@@ -10,7 +10,11 @@ data class SignUpUserRequest(
     val cPassword : String
 )
 
-
+data class ForgotPassword(
+    val email : String,
+    val password : String,
+    val cpassword : String
+)
 
 data class SignInUserRequest(
     val email : String,

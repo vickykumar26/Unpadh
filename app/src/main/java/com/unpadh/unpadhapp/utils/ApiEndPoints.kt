@@ -11,4 +11,6 @@ object ApiEndPoints {
 
  const val USER_REGISTER = "user/register"
 
+ const val FORGOT_PASSWORD = "user/forgotpass"
+
 }

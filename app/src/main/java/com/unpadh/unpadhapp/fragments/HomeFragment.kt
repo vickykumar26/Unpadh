@@ -1,7 +1,10 @@
 package com.unpadh.unpadhapp.fragments
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +25,9 @@ import com.unpadh.unpadhapp.onboarding_screens.adapter.AllCoursesAdapter
 import com.unpadh.unpadhapp.onboarding_screens.adapter.CourseAdapter
 import com.unpadh.unpadhapp.onboarding_screens.adapter.SliderAdapter
 import com.unpadh.unpadhapp.onboarding_screens.adapter.TeacherAdapter
+import com.unpadh.unpadhapp.shared_preference.SharedPreferencesDataSource
+import com.unpadh.unpadhapp.shared_preference.SharedPreferencesRepository
+import com.unpadh.unpadhapp.utils.AppConstants
 
 class HomeFragment : Fragment() {
 
@@ -33,6 +39,9 @@ class HomeFragment : Fragment() {
     private val items2 = ArrayList<CourseItem>()
     private val items3 = ArrayList<TeacherItem>()
 
+    private lateinit var sharedPreferencesRepository: SharedPreferencesDataSource
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,6 +51,16 @@ class HomeFragment : Fragment() {
         binding.cartImg.setOnClickListener{
             val intent = Intent(requireContext(),EmptyCart::class.java)
             startActivity(intent)
+        }
+
+        sharedPreferencesRepository = SharedPreferencesRepository(requireContext())
+
+        var profileImg = sharedPreferencesRepository.getStringValue(AppConstants.USER_PROFILE_PIC, "")
+        var userName = sharedPreferencesRepository.getStringValue(AppConstants.USER_NAME, "")
+
+        binding.userAccountName.setText("Hi, ${userName.toString()}")
+        if (!profileImg.isNullOrEmpty()){
+            binding.profileImg.setImageBitmap(base64ToBitmap(profileImg))
         }
 
         sliderView = binding.root.findViewById(R.id.imageSlider)
@@ -68,6 +87,18 @@ class HomeFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun base64ToBitmap(base64String: String?): Bitmap? {
+        try {
+            if (base64String != null) {
+                val decodedBytes = Base64.decode(base64String, Base64.DEFAULT)
+                return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
