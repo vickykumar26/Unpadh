@@ -37,6 +37,9 @@ class MainActivity : AppCompatActivity() {
             Utils.hideDialog()
             if (users != null){
                 Toast.makeText(this, users.message.toString(),Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@MainActivity, DashboardScreen::class.java)
+                startActivity(intent)
+                finish()
             }else{
                 Toast.makeText(this,"Something went wrong, please try again later.",Toast.LENGTH_SHORT).show()
             }
@@ -83,7 +86,6 @@ class MainActivity : AppCompatActivity() {
 
 
         if (validEmail && validPassword) {
-
             viewModel.apiCallForSignInUser(name,email)
 
             //pass main dashboard intent

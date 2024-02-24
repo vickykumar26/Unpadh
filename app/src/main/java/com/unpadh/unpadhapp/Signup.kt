@@ -96,6 +96,9 @@ class Signup : AppCompatActivity() {
             Utils.hideDialog()
             if (users != null){
                 Toast.makeText(this, users.message.toString(),Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@Signup, MainActivity::class.java)
+                startActivity(intent)
+                finish()
             }else{
                 Toast.makeText(this,"Something went wrong, please try again later.",Toast.LENGTH_SHORT).show()
             }
